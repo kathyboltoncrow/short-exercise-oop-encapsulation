@@ -4,8 +4,14 @@ import java.text.MessageFormat;
 
 public class WeatherReporter {
 
-    public String location;
-    public double temperature;
+    private static final String LONDON = "London";
+    private static final String CALIFORNIA = "California";
+    private static final String CAPE_TOWN = "Cape Town";
+    private static final int HOT_TEMPERATURE = 30;
+    private static final int COLD_TEMPERATURE = 10;
+    private String location;
+    private double temperature;
+
 
     public WeatherReporter(String location, double temperature) {
         this.location = location;
@@ -14,21 +20,21 @@ public class WeatherReporter {
 
     public String print() {
 
-        double newTemp = (9.0 / 5.0) * temperature + 32;
-        return MessageFormat.format("I am in {0} and it is {1}. {2}. The temperature in Fahrenheit is {3}.", location, check1(), check2(), newTemp);
+        double fahrenheitTemp = (9.0 / 5.0) * temperature + 32;
+        return MessageFormat.format("I am in {0} and it is {1}. {2}. The temperature in Fahrenheit is {3}.", location, checkLocation(), checkTemperature(), fahrenheitTemp);
 
     }
 
-    public String check1() {
-        if (location == "London") {
+    public String checkLocation() {
+        if (LONDON.equals(location)) {
 
             return "🌦";
 
-        } else if (location == "California") {
+        } else if (CALIFORNIA.equals(location)) {
 
             return "🌅";
 
-        } else if (location == "Cape Town") {
+        } else if (CAPE_TOWN.equals(location)) {
 
             return "🌤";
 
@@ -36,12 +42,12 @@ public class WeatherReporter {
         return "🔆";
     }
 
-    public String check2() {
-        if (temperature > 30) {
+    public String checkTemperature() {
+        if (temperature > HOT_TEMPERATURE) {
 
             return "It's too hot 🥵!";
 
-        } else if (temperature < 10) {
+        } else if (temperature < COLD_TEMPERATURE) {
 
             return "It's too cold 🥶!";
 
